@@ -436,7 +436,7 @@ class Zend_Controller_Router_Route extends Zend_Controller_Router_Route_Abstract
 
             if ($flag || $value !== $defaultValue || $partial) {
                 if ($encode) {
-                    $value = urlencode($value);
+                    $value = urlencode($value ?? '');
                 }
                 $return = $this->_urlDelimiter . $value . $return;
                 $flag   = true;
