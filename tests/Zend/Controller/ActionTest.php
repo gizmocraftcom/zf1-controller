@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,9 +28,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Action
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Action')]
 class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
 {
     protected $_controller;
@@ -205,9 +206,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('bar', $params['foo']);
     }
 
-    /**
-     * @group ZF-5163
-     */
+    #[Group('ZF-5163')]
     public function testGetParamForZeroValues()
     {
         $this->_controller->setParam('foo', 'bar');
@@ -219,9 +218,7 @@ class Zend_Controller_ActionTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(-1, $this->_controller->getParam('baz', -1));
     }
 
-    /**
-     * @group ZF-9179
-     */
+    #[Group('ZF-9179')]
     public function testGetParamForEmptyString()
     {
         $this->_controller->setParam('lang', '');

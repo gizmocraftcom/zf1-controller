@@ -20,6 +20,9 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+
 require_once dirname(__FILE__) . '/../../_files/modules/foo/controllers/IndexController.php';
 require_once dirname(__FILE__) . '/../../_files/modules/bar/controllers/IndexController.php';
 
@@ -31,10 +34,10 @@ require_once dirname(__FILE__) . '/../../_files/modules/bar/controllers/IndexCon
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Action
- * @group      Zend_Controller_Action_Helper
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Action')]
+#[Group('Zend_Controller_Action_Helper')]
 class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\TestCase
 {
     /**
@@ -796,9 +799,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         $body = $this->response->getBody();
         $this->assertStringContainsString('fooUseHelper invoked', $body, 'Received ' . $body);
     }
-    /**
-     * @group ZF-10725
-     */
+    #[Group('ZF-10725')]
     public function testThatCharactersStrippedFromActionNameByDispatcherAreAlsoStrippedFromViewScriptName()
     {
         $this->request->setModuleName('default')
@@ -822,9 +823,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         $this->assertStringContainsString('SampleZfHelper invoked', $body, 'Received ' . $body);
     }
 
-    /**
-     * @group ZF-11127
-     */
+    #[Group('ZF-11127')]
     public function testViewSuffixInstanceNotSharedWhenViewHelperIsCloned()
     {
         $a = new Zend_Controller_Action_Helper_ViewRenderer();
@@ -841,10 +840,8 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         $this->assertNotEquals('B', $a->getViewSuffix());
     }
 
-    /**
-     * @group ZF-10725
-     * @dataProvider providerViewScriptNameDoesNotIncludeDisallowedCharacters
-     */
+    #[Group('ZF-10725')]
+    #[DataProvider('providerViewScriptNameDoesNotIncludeDisallowedCharacters')]
     public function testViewScriptNameDoesNotIncludeDisallowedCharacters($actionName)
     {
         $this->request->setModuleName('default')
@@ -858,9 +855,9 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
 
     /**
      * Data provider for testViewScriptNameDoesNotIncludeDisallowedCharacters
-     * @group ZF-10725
      * @return array
      */
+    #[Group('ZF-10725')]
     public static function providerViewScriptNameDoesNotIncludeDisallowedCharacters()
     {
         return array(
@@ -873,10 +870,8 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         );
     }
 
-    /**
-     * @group GH-440
-     * @dataProvider providerControllerNameDoesNotIncludeDisallowedCharacters
-     */
+    #[Group('GH-440')]
+    #[DataProvider('providerControllerNameDoesNotIncludeDisallowedCharacters')]
     public function testControllerNameDoesNotIncludeDisallowedCharacters($controllerName)
     {
         $this->request->setControllerName($controllerName)
@@ -898,9 +893,9 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
 
     /**
      * Data provider for testControllerNameDoesNotIncludeDisallowedCharacters
-     * @group GH-440
      * @return array
      */
+    #[Group('GH-440')]
     public static function providerControllerNameDoesNotIncludeDisallowedCharacters()
     {
         return array(
@@ -910,9 +905,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         );
     }
 
-    /**
-     * @group GH-440
-     */
+    #[Group('GH-440')]
     public function testControllerNameFormattingShouldRespectWordCamelCaseToDash()
     {
         $this->request->setControllerName('MetadataValidation')
@@ -937,9 +930,7 @@ class Zend_Controller_Action_Helper_ViewRendererTest extends PHPUnit\Framework\T
         return str_replace(array('/', '\\'), '/', $path);
     }
 
-    /**
-     * @group ZF-10725
-     */
+    #[Group('ZF-10725')]
     public function testActionsWithLeadingCapitalLettersShouldNotInvokeTruncatedViewScripts()
     {
         $this->request->setModuleName('default')

@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
+
 require_once dirname(dirname(dirname(__FILE__))) . '/_files/HelperFlashMessengerController.php';
 
 /**
@@ -28,10 +30,10 @@ require_once dirname(dirname(dirname(__FILE__))) . '/_files/HelperFlashMessenger
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Action
- * @group      Zend_Controller_Action_Helper
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Action')]
+#[Group('Zend_Controller_Action_Helper')]
 class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework\TestCase
 {
     /**
@@ -115,17 +117,15 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework
     }
 
     /**
-     * @group ZF-1705
      */
+    #[Group('ZF-1705')]
     public function testNamespaceChange()
     {
         $this->helper->setNamespace('foobar');
         $this->assertEquals('foobar', $this->helper->getNamespace());
     }
 
-    /**
-     * @group ZF-1705
-     */
+    #[Group('ZF-1705')]
     public function testAddMessageToCustomNamespace()
     {
         $this->helper->addMessage('testmessage', 'foobar');
@@ -142,9 +142,7 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework
         $this->assertEmpty($defaultMessages, 'Default namespace not empty');
     }
 
-    /**
-     * @group ZF-1705
-     */
+    #[Group('ZF-1705')]
     public function testRemoveMessageToCustomNamespace()
     {
         // Place a message in foobar and default namespaces
@@ -166,9 +164,7 @@ class Zend_Controller_Action_Helper_FlashMessengerTest extends PHPUnit\Framework
         $this->assertEquals('defaultmessage', array_pop($defaultMessages));
     }
 
-    /**
-     * @group ZF-1705
-     */
+    #[Group('ZF-1705')]
     public function testSimulateCrossRequestMessagePassing()
     {
         $helper = new FlashMessengerControllerActionHelper;

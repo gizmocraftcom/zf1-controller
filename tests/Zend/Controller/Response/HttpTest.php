@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,9 +28,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Response
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Response')]
 class Zend_Controller_Response_HttpTest extends PHPUnit\Framework\TestCase
 {
     /**
@@ -99,8 +100,8 @@ class Zend_Controller_Response_HttpTest extends PHPUnit\Framework\TestCase
     }
 
     /**
-     * @group ZF-6038
      */
+    #[Group('ZF-6038')]
     public function testClearHeader()
     {
         $this->_response->setHeader('Connection', 'keep-alive');
@@ -130,9 +131,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEmpty($headers);
     }
 
-    /**
-     * @group ZF-6038
-     */
+    #[Group('ZF-6038')]
     public function testClearRawHeader()
     {
         $this->_response->setRawHeader('HTTP/1.0 404 Not Found');
@@ -145,9 +144,7 @@ class Zend_Controller_Response_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertFalse($originalHeadersRaw == $updatedHeadersRaw);
     }
 
-    /**
-     * @group ZF-6038
-     */
+    #[Group('ZF-6038')]
     public function testClearRawHeaderThatDoesNotExist()
     {
         $this->_response->setRawHeader('HTTP/1.0 404 Not Found');

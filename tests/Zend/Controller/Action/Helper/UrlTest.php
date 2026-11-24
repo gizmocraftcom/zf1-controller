@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test class for Zend_Controller_Action_Helper_Url.
@@ -29,10 +30,10 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Action
- * @group      Zend_Controller_Action_Helper
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Action')]
+#[Group('Zend_Controller_Action_Helper')]
 class Zend_Controller_Action_Helper_UrlTest extends PHPUnit\Framework\TestCase
 {
     protected $front;
@@ -146,9 +147,7 @@ class Zend_Controller_Action_Helper_UrlTest extends PHPUnit\Framework\TestCase
         $this->assertStringContainsString('/ho/hum', $url);
     }
 
-    /**
-     * @group ZF-2822
-     */
+    #[Group('ZF-2822')]
     public function testBaseUrlIsAssembledIntoUrl()
     {
         $this->front->setBaseUrl('baseurl');

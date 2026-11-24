@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,9 +28,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Router
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Router')]
 class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
 {
     protected $_request;
@@ -226,6 +227,12 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('mod/ctrl', $url);
     }
 
+    public function testAssembleParamWithOddSegmentCountMatchedHasNullValue()
+    {
+        // an odd number of path segments leaves the last parameter null; urlencode(null) is deprecated since PHP 8.1
+        $this->route->match('mod/ctrl/act/foo/bar/baz');
+        $this->assertSame('mod/ctrl/act/foo/bar/baz/', $this->route->assemble(array()));
+    }
     public function testAssembleNoActionWithParams()
     {
         $params = array(
@@ -441,9 +448,7 @@ class Zend_Controller_Router_Route_ModuleTest extends PHPUnit\Framework\TestCase
         $this->assertSame('index', $values['a'], var_export(array_keys($values), 1));
     }
 
-    /**
-     * @group ZF-8029
-     */
+    #[Group('ZF-8029')]
     public function testAssembleShouldUrlEncodeAllParameterNames()
     {
         $params = array(

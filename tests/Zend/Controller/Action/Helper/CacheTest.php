@@ -4,6 +4,10 @@
 /**
  * Test class for Zend_Controller_Action_Helper_Cache
  */
+
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+
 class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
 {
     protected $_requestUriOld;
@@ -128,10 +132,8 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
         $this->assertNotEquals('verified', $cache->res);
     }
 
-    /**
-     * @group ZF-11885
-     * @dataProvider dataprovider_testEncodedCacheIdsAreUsedConsistently
-     */
+    #[Group('ZF-11885')]
+    #[DataProvider('dataprovider_testEncodedCacheIdsAreUsedConsistently')]
     public function testEncodedCacheIdsAreUsedConsistently($recursive)
     {
         $helper = new Zend_Controller_Action_Helper_Cache();
@@ -149,10 +151,8 @@ class Zend_Controller_Action_Helper_CacheTest extends PHPUnit\Framework\TestCase
         $this->assertFalse(isset($cache->items[$uriKey]));
     }
 
-    /**
-     * @group ZF-11885
-     * @dataProvider dataprovider_testEncodedCacheIdsAreUsedConsistently
-     */
+    #[Group('ZF-11885')]
+    #[DataProvider('dataprovider_testEncodedCacheIdsAreUsedConsistently')]
     public function testRemovePageAcceptsPreEncodedCacheIds($recursive)
     {
         $helper = new Zend_Controller_Action_Helper_Cache();

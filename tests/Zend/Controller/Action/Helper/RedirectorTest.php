@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test class for Zend_Controller_Action_Helper_Redirector.
@@ -29,10 +30,10 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Action
- * @group      Zend_Controller_Action_Helper
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Action')]
+#[Group('Zend_Controller_Action_Helper')]
 class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\TestCase
 {
     /**
@@ -458,9 +459,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
         $this->assertEquals('/account/login', $test, $test);
     }
 
-    /**
-     * @group ZF-4318
-     */
+    #[Group('ZF-4318')]
     public function testServerVariableHttpsToOffDoesNotBuildHttpsUrl()
     {
         // Set Preconditions from Issue:
@@ -479,9 +478,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
         $this->assertEquals('http://localhost/bar/baz', $test);
     }
 
-    /**
-     * @group ZF-9859
-     */
+    #[Group('ZF-9859')]
     public function testGotoUrlAndSetGotoUrlBehaveTheSame()
     {
         $url        = 'http://www.example.com';
@@ -490,9 +487,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
         $this->assertSame($gotoUrl, $setGotoUrl);
     }
 
-    /**
-     * @group ZF-10364
-     */
+    #[Group('ZF-10364')]
     public function testGotoSimpleDefaultModuleRedirectsToDefaultModule()
     {
         $this->controller->getFrontController()->setDefaultModule('test')
@@ -510,7 +505,7 @@ class Zend_Controller_Action_Helper_RedirectorTest extends PHPUnit\Framework\Tes
         $this->assertEquals($expected, $result);
     }
 
-    /** @group ZF-6025 */
+    #[Group('ZF-6025')]
     public function testGotoSimpleShouldNotHardcodeControllerActionModuleKeys()
     {
         $this->request->setControllerKey('foo')

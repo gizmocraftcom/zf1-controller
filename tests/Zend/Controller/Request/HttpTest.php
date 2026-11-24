@@ -20,6 +20,8 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,9 +29,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Request
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Request')]
 class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
 {
     /**
@@ -216,8 +218,8 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
     }
 
     /**
-     * @group ZF-3750
      */
+    #[Group('ZF-3750')]
     public function testGetParamsWithGetOrPost()
     {
         $_GET = array(
@@ -396,8 +398,8 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
 
     /**
      * Dataprovider for testing prefix paths in the base url
-     * @group ZF-10040
      */
+    #[Group('ZF-10040')]
     public static function prefixProvider()
     {
         return array(
@@ -407,10 +409,8 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
             array('/foo'),
         );
     }
-    /**
-     * @dataProvider prefixProvider
-     * @group ZF-10040
-     */
+    #[DataProvider('prefixProvider')]
+    #[Group('ZF-10040')]
     public function testBaseUrlSetsProperLocation($prefix)
     {
         $_SERVER['REQUEST_URI']     = $prefix . '/index.php/news/3?var1=val1&var2=val2';
@@ -538,9 +538,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
 
         $this->assertEquals('/index.php', $request->getBaseUrl());
     }
-    /**
-     * @group ZF-7824
-     */
+    #[Group('ZF-7824')]
     public function testSetBaseUrlWithScriptNameAsGetParam()
     {
         $request = new Zend_Controller_Request_Http;
@@ -688,17 +686,13 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertTrue($this->_request->isFlashRequest());
     }
 
-    /**
-     * @group ZF-1798
-     */
+    #[Group('ZF-1798')]
     public function testGetAndPostBothInDefaultParamSources()
     {
         $this->assertEquals(array('_GET', '_POST'), $this->_request->getParamSources());
     }
 
-    /**
-     * @group ZF-1798
-     */
+    #[Group('ZF-1798')]
     public function testCanSetParamSources()
     {
         $this->testGetAndPostBothInDefaultParamSources();
@@ -708,9 +702,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertSame(array('_GET'), $this->_request->getParamSources());
     }
 
-    /**
-     * @group ZF-1798
-     */
+    #[Group('ZF-1798')]
     public function testParamSourcesHonoredByGetParam()
     {
         $_GET  = array('foo' => 'bar');
@@ -719,11 +711,9 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('baz', $this->_request->getParam('foo'));
     }
 
-    /**
-     * @group ZF-3161
-     * @group ZFI-233
-     * @group ZF-5818
-     */
+    #[Group('ZF-3161')]
+    #[Group('ZFI-233')]
+    #[Group('ZF-5818')]
     public function testStrippingHttpProtocolAndHostFromRequestUriOnlyWhenPresentAtBeginningOfUri()
     {
         $_SERVER['REQUEST_URI'] = 'http://foo.example.com/foo/bar?r=http://foo.example.com/bar/baz';
@@ -739,11 +729,9 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('/foo/bar?r=http://foo.example.com/bar/baz', $test);
     }
 
-    /**
-     * @group ZF-3161
-     * @group ZFI-233
-     * @group ZF-5818
-     */
+    #[Group('ZF-3161')]
+    #[Group('ZFI-233')]
+    #[Group('ZF-5818')]
     public function testStrippingHttpsProtocolAndHostFromRequestUriOnlyWhenPresentAtBeginningOfUri()
     {
         $_SERVER['REQUEST_URI'] = 'https://foo.example.com/foo/bar?r=https://foo.example.com/bar/baz';
@@ -761,11 +749,9 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('/foo/bar?r=https://foo.example.com/bar/baz', $test);
     }
 
-    /**
-     * @group ZF-3161
-     * @group ZFI-233
-     * @group ZF-5818
-     */
+    #[Group('ZF-3161')]
+    #[Group('ZFI-233')]
+    #[Group('ZF-5818')]
     public function testStrippingHttpProtocolHostAndNonStandardPortFromRequestUriOnlyWhenPresentAtBeginningOfUri()
     {
         $_SERVER['REQUEST_URI'] = 'http://foo.example.com:8888/foo/bar?r=http://foo.example.com:8888/bar/baz';
@@ -785,9 +771,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('/foo/bar?r=https://foo.example.com:8888/bar/baz', $test);
     }
 
-    /**
-     * @group ZF-7092
-     */
+    #[Group('ZF-7092')]
     public function testGetClientIp()
     {
         $request = new Zend_Controller_Request_Http();
@@ -811,9 +795,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('192.168.1.12', $request->getClientIp());
     }
 
-    /**
-     * @group ZF-7117
-     */
+    #[Group('ZF-7117')]
     public function testGetClientIpNoProxyCheck()
     {
         $request = new Zend_Controller_Request_Http();
@@ -825,9 +807,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('192.168.1.12', $request->getClientIp(false));
     }
 
-    /**
-     * @group ZF-7756
-     */
+    #[Group('ZF-7756')]
     public function testCallingGetRawBodyMultipleTimesShouldReturnSameValue()
     {
         Zend_AllTests_StreamWrapper_PhpInput::mockInput('foobar');
@@ -837,9 +817,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         stream_wrapper_restore('php');
     }
 
-    /**
-     * @group ZF-5107
-     */
+    #[Group('ZF-5107')]
     public function testGetParamsShouldHonorParamSourcesSetting()
     {
         $_GET  = array('foo' => 'bar');
@@ -849,9 +827,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(array('foo' => 'baz'), $params);
     }
 
-    /**
-     * @group ZF-9091
-     */
+    #[Group('ZF-9091')]
     public function testSetPathInfoShouldNotStripBaseUrlIfBaseUrlNotInRequestUri()
     {
         $request = new Zend_Controller_Request_Http();
@@ -861,9 +837,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('/index/index', $pathInfo);
     }
 
-    /**
-     * @group ZF-10577
-     */
+    #[Group('ZF-10577')]
     public function testGetHeaderWithEmptyValueReturnsEmptyString()
     {
         $_SERVER['HTTP_X_FOO'] = '';
@@ -872,9 +846,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
     }
 
 
-    /**
-     * @group ZF-3527
-     */
+    #[Group('ZF-3527')]
     public function testGetRequestUriShouldReturnDecodedUri()
     {
         $request = new Zend_Controller_Request_Http();
@@ -882,9 +854,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('~user', $request->getBaseUrl());
     }
 
-    /**
-     * @group ZF-3527
-     */
+    #[Group('ZF-3527')]
     public function testPathInfoShouldRespectEncodedBaseUrl()
     {
         $request = new Zend_Controller_Request_Http();
@@ -895,9 +865,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('/module/controller/action', $pathInfo, $pathInfo);
     }
 
-    /**
-     * @group ZF-3527
-     */
+    #[Group('ZF-3527')]
     public function testPathInfoShouldRespectNonEncodedBaseUrl()
     {
         $request = new Zend_Controller_Request_Http();
@@ -908,9 +876,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('/module/controller/action', $pathInfo, $pathInfo);
     }
 
-    /**
-     * @group ZF-3527
-     */
+    #[Group('ZF-3527')]
     public function testPathInfoShouldRespectEncodedRequestUri()
     {
         $request = new Zend_Controller_Request_Http();
@@ -921,9 +887,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('/module/controller/action', $pathInfo, $pathInfo);
     }
 
-    /**
-     * @group ZF-3527
-     */
+    #[Group('ZF-3527')]
     public function testPathInfoShouldRespectNonEncodedRequestUri()
     {
         $request = new Zend_Controller_Request_Http();
@@ -934,11 +898,9 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('/module/controller/action', $pathInfo, $pathInfo);
     }
 
-    /**
-     * @group ZF-3527
-     * @group ZF-10964
-     * @group ZF-10787
-     */
+    #[Group('ZF-3527')]
+    #[Group('ZF-10964')]
+    #[Group('ZF-10787')]
     public function testPathInfoShouldNotDecodeRequestParams()
     {
         $request                = new Zend_Controller_Request_Http();
@@ -948,9 +910,7 @@ class Zend_Controller_Request_HttpTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('/module/controller/action/param/escaped%2Fstring', $pathInfo, $pathInfo);
     }
 
-    /**
-     * @group ZF-9899
-     */
+    #[Group('ZF-9899')]
     public function testHostNameShouldBeEmpty()
     {
         $request = new Zend_Controller_Request_Http();

@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test class for Zend_Controller_Request_HttpTestCase.
@@ -29,9 +30,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Request
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Request')]
 class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCase
 {
     protected $request;
@@ -268,9 +269,7 @@ class Zend_Controller_Request_HttpTestCaseTest extends PHPUnit\Framework\TestCas
         $this->assertEmpty($test);
     }
 
-    /**
-     * @group ZF-6162
-     */
+    #[Group('ZF-6162')]
     public function testRequestMethodShouldBeGetByDefault()
     {
         $this->assertEquals('GET', $this->request->getMethod());

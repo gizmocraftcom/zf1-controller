@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,9 +28,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Router
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Router')]
 class Zend_Controller_Router_RouteTest extends PHPUnit\Framework\TestCase
 {
     /**
@@ -414,9 +415,7 @@ class Zend_Controller_Router_RouteTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('archives/2006/03', $url);
     }
 
-    /**
-     * @group ZF-7917
-     */
+    #[Group('ZF-7917')]
     public function testAssembleWithGivenDataEqualsDefaults()
     {
         $route = new Zend_Controller_Router_Route('index/*', array(

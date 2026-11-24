@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,9 +28,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Router
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Router')]
 class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
 {
     protected $_router;
@@ -687,9 +688,9 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
      * Test that it is possible to generate a URL with a numerical key
      *
      * @since  2010-06-11
-     * @group  ZF-8914
      * @covers Zend_Controller_Router_Rewrite::assemble
      */
+    #[Group('ZF-8914')]
     public function testCanGenerateNumericKeyUri()
     {
         $this->_router->addRoute(
@@ -713,9 +714,7 @@ class Zend_Controller_Router_RewriteTest extends PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @group ZF-11393
-     */
+    #[Group('ZF-11393')]
     public function testCallingAssembleWithNullArgumentShouldThrowException()
     {
         $this->expectException(\Zend_Controller_Router_Exception::class);

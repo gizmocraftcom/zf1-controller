@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,9 +28,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Front
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Front')]
 class Zend_Controller_FrontTest extends PHPUnit\Framework\TestCase
 {
     protected $_controller = null;

@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,9 +28,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Router
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Router')]
 class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
 {
     public function testChaining()
@@ -64,9 +65,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(2, $res['bar']);
     }
 
-    /**
-     * @group ZF-8812
-     */
+    #[Group('ZF-8812')]
     public function testChainingMatchToDefaultValues()
     {
         $foo = new Zend_Controller_Router_Route(
@@ -615,8 +614,8 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
     }
 
     /**
-     * @group ZF-7848
      */
+    #[Group('ZF-7848')]
     public function testChainingWithEmptyStaticRoutesMatchesCorrectly()
     {
         $adminRoute = new Zend_Controller_Router_Route('admin', array(
@@ -663,9 +662,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         ), $values);
     }
 
-    /**
-     * @group ZF-7848
-     */
+    #[Group('ZF-7848')]
     public function testChainingWithConfiguredEmptyStaticRoutesMatchesCorrectly()
     {
         $routes = array(
@@ -731,9 +728,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         ), $values);
     }
 
-    /**
-     * @group ZF-7368
-     */
+    #[Group('ZF-7368')]
     public function testChainingStaticDynamicMatchToDefaults()
     {
         $foo   = new Zend_Controller_Router_Route_Static('foo');
@@ -747,9 +742,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(0, $res['bar']);
     }
 
-    /**
-     * @group ZF-7368
-     */
+    #[Group('ZF-7368')]
     public function testChainingStaticDynamicMatchToParams()
     {
         $foo   = new Zend_Controller_Router_Route_Static('foo');
@@ -809,9 +802,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('static', $rewrite->getCurrentRouteName(), 'Routing did not match expected route');
     }
 
-    /**
-     * @group ZF-11443
-     */
+    #[Group('ZF-11443')]
     public function testGetDefault()
     {
         // Create chained route
@@ -840,9 +831,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $this->assertSame('baz', $chain->getDefault('baz'));
     }
 
-    /**
-     * @group ZF-11443
-     */
+    #[Group('ZF-11443')]
     public function testGetDefaultPriority()
     {
         // Create chained route
@@ -869,9 +858,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $this->assertSame(3, $chain->getDefault('priority'));
     }
 
-    /**
-     * @group ZF-11443
-     */
+    #[Group('ZF-11443')]
     public function testGetDefaults()
     {
         // Create chained route
@@ -904,9 +891,7 @@ class Zend_Controller_Router_Route_ChainTest extends PHPUnit\Framework\TestCase
         $this->assertSame('baz', $values['baz']);
     }
 
-    /**
-     * @group ZF-11443
-     */
+    #[Group('ZF-11443')]
     public function testGetDefaultsPriority()
     {
         // Create chained route

@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test class for Zend_Controller_Request_Simple.
@@ -29,9 +30,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Request
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Request')]
 class Zend_Controller_Request_SimpleTest extends PHPUnit\Framework\TestCase
 {
     public function testSimpleRequestIsOfAbstractRequestType()
@@ -49,9 +50,7 @@ class Zend_Controller_Request_SimpleTest extends PHPUnit\Framework\TestCase
         $this->assertEquals($request->getParam('test4'), 'test5');
     }
 
-    /**
-     * @group ZF-3472
-     */
+    #[Group('ZF-3472')]
     public function testSettingParamToNullInSetparamsCorrectlyUnsetsValue()
     {
         $request = new Zend_Controller_Request_Simple;

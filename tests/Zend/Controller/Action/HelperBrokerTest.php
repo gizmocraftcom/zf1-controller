@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * @category   Zend
@@ -27,10 +28,10 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Action
- * @group      Zend_Controller_Action_Helper
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Action')]
+#[Group('Zend_Controller_Action_Helper')]
 class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
 {
     /**
@@ -285,8 +286,8 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
     }
 
     /**
-     * @group ZF-4704
      */
+    #[Group('ZF-4704')]
     public function testPluginLoaderShouldHaveDefaultPrefixPath()
     {
         $loader = Zend_Controller_Action_HelperBroker::getPluginLoader();
@@ -308,9 +309,7 @@ class Zend_Controller_Action_HelperBrokerTest extends PHPUnit\Framework\TestCase
         $this->assertEquals('MyApp\Controller\Action\Helper\NamespacedHelper', $response->getBody());
     }
 
-    /**
-     * @group ZF-4704
-     */
+    #[Group('ZF-4704')]
     public function testBrokerShouldAcceptCustomPluginLoaderInstance()
     {
         $loader = Zend_Controller_Action_HelperBroker::getPluginLoader();

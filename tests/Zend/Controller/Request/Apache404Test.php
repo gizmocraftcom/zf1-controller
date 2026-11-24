@@ -20,6 +20,7 @@
  * @version    $Id$
  */
 
+use PHPUnit\Framework\Attributes\Group;
 
 /**
  * Test class for Zend_Controller_Request_Apache404.
@@ -30,9 +31,9 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Controller
- * @group      Zend_Controller_Request
  */
+#[Group('Zend_Controller')]
+#[Group('Zend_Controller_Request')]
 class Zend_Controller_Request_Apache404Test extends PHPUnit\Framework\TestCase
 {
     /**
@@ -62,9 +63,9 @@ class Zend_Controller_Request_Apache404Test extends PHPUnit\Framework\TestCase
     }
 
     /**
-     * @group ZF-3057
-     * @group ZF-9776
      */
+    #[Group('ZF-3057')]
+    #[Group('ZF-9776')]
     public function testRedirectQueryStringShouldBeParsedIntoGetVars()
     {
         $_SERVER['REDIRECT_URL']          = '/foo/bar';
